@@ -1,9 +1,9 @@
 import './App.css';
-import { useState , useRef, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
 
-  let [task, setTask] = useState([ 
+  let [task] = useState([ 
     {
       name: "Task1",
       place: "School",
