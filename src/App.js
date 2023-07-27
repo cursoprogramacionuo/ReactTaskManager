@@ -10,6 +10,8 @@ function App() {
   let placeRef = useRef("");
   let priorityRef = useRef(0);
 
+  let formRef = useRef()
+
   let [tasks, setTasks] = useState([ 
     {
       name: "Task1",
@@ -30,6 +32,9 @@ function App() {
       priority: priority
     }
     setTasks([...tasks, newTask])
+    setName("")
+    setPlace("")
+    setPriority("")
   }
 
   let addTaskWithRefs = () =>{
@@ -39,14 +44,30 @@ function App() {
       priority: priorityRef.current.value
     }
     setTasks([...tasks, newTask])
+    nameRef.current.value = "";
+    placeRef.current.value = ""
+    priorityRef.current.value = ""
   }
+
+  let addTaskWithFormRef = () => {
+    let formData = new FormData(formRef.current);
+    
+    let newTask = {
+      name:  formData.get("name"),
+      place:  formData.get("place"),
+      priority:  formData.get("priority")
+    }
+    setTasks([...tasks, newTask])
+  }
+
+
 
   return (
     <div>
       <h2>Add task</h2>
-      <input type="text" placeholder='name' onChange={(e) => { setName(e.currentTarget.value) } }></input>
-      <input type="text" placeholder='place' onChange={(e) => { setPlace(e.currentTarget.value) } }></input>
-      <input type="number" placeholder='priority' onChange={(e) => { setPriority(parseInt(e.currentTarget.value)) } }></input>
+      <input type="text" placeholder='name' value={name} onChange={(e) => { setName(e.currentTarget.value) } }></input>
+      <input type="text" placeholder='place' value={place} onChange={(e) => { setPlace(e.currentTarget.value) } }></input>
+      <input type="number" placeholder='priority' value={priority} onChange={(e) => { setPriority(parseInt(e.currentTarget.value)) } }></input>
       <button onClick={addTask} > Add task </button>
 
       <h2>Add tasks Ref</h2>
@@ -54,6 +75,15 @@ function App() {
       <input ref={placeRef} type="text" placeholder='place' ></input>
       <input ref={priorityRef} type="number" placeholder='priority' ></input>
       <button onClick={addTaskWithRefs} > Add task </button>
+
+      <h2>Add tasks Form Ref</h2>
+      <form ref={formRef}>
+        <input name="name" type="text" placeholder='name' ></input>
+        <input name="place" type="text" placeholder='place' ></input>
+        <input name="priority" type="number" placeholder='priority' ></input>
+      </form>
+      <button onClick={addTaskWithFormRef} > Add task </button>
+
 
       <ul>
         { tasks.map( t => 
