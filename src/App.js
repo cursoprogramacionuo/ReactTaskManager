@@ -26,7 +26,7 @@ let App = () => {
 
   return (
     <div className="container">
-      <ListOfTasksComponent tasks={tasks} setTaskSelected={setTaskSelected}/>
+      <ListOfTasksComponent setTasks={setTasks} tasks={tasks} setTaskSelected={setTaskSelected}/>
 
       <CreateTaskComponent tasks={tasks} setTasks={setTasks}/>
 
