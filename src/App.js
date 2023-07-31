@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import DetailsOfTasksComponent from './Components/DetailsOfTaskComponent';
 import ListOfTasksComponent from './Components/ListOfTasksComponent';
 import CreateTaskComponent from './Components/CreateTaskComponent';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 
 let App = () => {
 
@@ -27,6 +27,12 @@ let App = () => {
 
   return (
     <div className="container">
+      <nav>
+        <ul className='navbar'>
+          <li><Link to="/">Tasks</Link></li>
+          <li><Link to="/createTask">Add Task</Link></li>
+        </ul>
+      </nav>
       <Routes>
 
         <Route path="/" element={
